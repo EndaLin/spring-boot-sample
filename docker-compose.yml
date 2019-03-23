@@ -1,0 +1,15 @@
+version: "2"
+services:
+  db:
+    network_mode: "host"
+    image: mysql:5
+    container_name: db
+    environment:
+      MYSQL_DATABASE: enda
+      MYSQL_ROOT_PASSWORD: 123
+    volumes:
+      - /db:/var/lib/mysql
+      - ./db/mysql:/etc/mysql
+    restart: always
+    ports:
+      - "3306:3306"
