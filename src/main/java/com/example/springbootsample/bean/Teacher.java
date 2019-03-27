@@ -55,4 +55,14 @@ public class Teacher {
     public void setStudents(List<Student> students) {
         this.students = students;
     }
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "tid=" + tid +
+                ", name='" + name + '\'' +
+                ", principal=" + principal +
+                ", students=" + students +
+                '}';
+    }
 }

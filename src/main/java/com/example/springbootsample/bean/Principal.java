@@ -43,4 +43,13 @@ public class Principal {
     public void setTeachers(List<Teacher> teachers) {
         this.teachers = teachers;
     }
+
+    @Override
+    public String toString() {
+        return "Principal{" +
+                "pid=" + pid +
+                ", name='" + name + '\'' +
+                ", teachers=" + teachers +
+                '}';
+    }
 }

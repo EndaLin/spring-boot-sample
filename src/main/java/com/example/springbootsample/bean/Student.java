@@ -46,4 +46,13 @@ public class Student {
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "sid=" + sid +
+                ", name='" + name + '\'' +
+                ", teacher=" + teacher +
+                '}';
+    }
 }
