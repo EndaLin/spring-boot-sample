@@ -1,34 +1,58 @@
 package com.example.springbootsample;
 
+import com.example.springbootsample.bean.Principal;
 import com.example.springbootsample.bean.Student;
+import com.example.springbootsample.bean.Teacher;
+import com.example.springbootsample.dao.PrincipalRepository;
+import com.example.springbootsample.dao.StudentRepository;
+import com.example.springbootsample.dao.TeacherRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpringbootSampleApplicationTests {
 
     @Autowired
-    DataSource dataSource;
+    PrincipalRepository principalRepository;
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    TeacherRepository teacherRepository;
+
+    @Autowired
+    StudentRepository studentRepository;
+
 
     @Test
-    public void contextLoads() throws SQLException {
-//        List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from student");
-//        System.out.println(list.toString());
-        System.out.println(dataSource.getClass());
+    public void insert() throws SQLException {
+        // 创建校长实例, 并保存
+        Principal principal = new Principal();
+        principal.setName("principal");
+        principalRepository.save(principal);
+
+        // 创建老师实例, 并保存
+        Teacher teacher = new Teacher();
+        teacher.setName("teacher");
+        teacher.setPrincipal(principal);
+        teacherRepository.save(teacher);
+
+        // 创建学生, 并保存
+        Student student = new Student();
+        student.setName("student");
+        student.setTeacher(teacher);
+        studentRepository.save(student);
     }
 
+
+    @Test
+    public void find() {
+        List<Principal> listPrincipal = principalRepository.findAll();
+        System.out.println(listPrincipal.get(0).toString());
+    }
 }

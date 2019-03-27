@@ -62,7 +62,7 @@ public class Teacher {
                 "tid=" + tid +
                 ", name='" + name + '\'' +
                 ", principal=" + principal +
-                ", students=" + students +
+                ", students=" + students.toString() +
                 '}';
     }
 }

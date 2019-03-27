@@ -49,7 +49,7 @@ public class Principal {
         return "Principal{" +
                 "pid=" + pid +
                 ", name='" + name + '\'' +
-                ", teachers=" + teachers +
+                ", teachers=" + teachers.toString() +
                 '}';
     }
 }
