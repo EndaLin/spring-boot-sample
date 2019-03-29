@@ -1,5 +1,6 @@
-FROM ubuntu:18.04
-RUN apt-get update \
-    && apt-get install -y curl \
-    && rm -rf /var/lib/apt/lists/*
-CMD [ "curl", "-s", "https://ip.cn" ]
+FROM ruby:2.4
+
+RUN gem install redis-stat && redis-stat --server=63790 --auth=
+
+EXPOSE 63790
+ENTRYPOINT ["redis-stat"]

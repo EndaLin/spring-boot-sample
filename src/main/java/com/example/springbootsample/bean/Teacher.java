@@ -61,8 +61,7 @@ public class Teacher {
         return "Teacher{" +
                 "tid=" + tid +
                 ", name='" + name + '\'' +
-                ", principal=" + principal +
-                ", students=" + students.toString() +
+                ", students=" + students +
                 '}';
     }
 }

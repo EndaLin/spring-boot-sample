@@ -3,9 +3,11 @@ package com.example.springbootsample;
 import com.example.springbootsample.bean.Principal;
 import com.example.springbootsample.bean.Student;
 import com.example.springbootsample.bean.Teacher;
+import com.example.springbootsample.bean.TreeNode;
 import com.example.springbootsample.dao.PrincipalRepository;
 import com.example.springbootsample.dao.StudentRepository;
 import com.example.springbootsample.dao.TeacherRepository;
+import com.example.springbootsample.dao.TreeNodeRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class SpringbootSampleApplicationTests {
 
     @Autowired
     StudentRepository studentRepository;
+
+    @Autowired
+    TreeNodeRepository treeNodeRepository;
 
 
     @Test
@@ -54,5 +59,34 @@ public class SpringbootSampleApplicationTests {
     public void find() {
         List<Principal> listPrincipal = principalRepository.findAll();
         System.out.println(listPrincipal.get(0).toString());
+    }
+
+    @Test
+    public void insertTreeNode() {
+        TreeNode treeNode = new TreeNode();
+        treeNode.setName("one");
+        treeNodeRepository.save(treeNode);
+
+        TreeNode treeNode1 = new TreeNode();
+        treeNode1.setName("two");
+        treeNode1.setParent(treeNode);
+        treeNodeRepository.save(treeNode1);
+
+        TreeNode treeNode2 = new TreeNode();
+        treeNode2.setName("three");
+        treeNode2.setParent(treeNode1);
+        treeNodeRepository.save(treeNode2);
+    }
+
+    @Test
+    public void deleteTreeNode(){
+       TreeNode treeNode = treeNodeRepository.findById(45).get();
+        TreeNode parent = treeNode.getParent();
+        List<TreeNode> listChild = treeNode.getListChild();
+        for (TreeNode child: listChild) {
+            child.setParent(parent);
+            treeNodeRepository.saveAndFlush(child);
+        }
+        treeNodeRepository.deleteById(45);
     }
 }

@@ -52,7 +52,6 @@ public class Student {
         return "Student{" +
                 "sid=" + sid +
                 ", name='" + name + '\'' +
-                ", teacher=" + teacher +
                 '}';
     }
 }

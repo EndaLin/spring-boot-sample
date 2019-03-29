@@ -13,3 +13,8 @@ services:
     restart: always
     ports:
       - "3306:3306"
+  redis-stat:
+    image: redis-stat
+    restart: always
+    ports:
+      - "63790:63790"
