@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -79,14 +80,15 @@ public class SpringbootSampleApplicationTests {
     }
 
     @Test
-    public void deleteTreeNode(){
-       TreeNode treeNode = treeNodeRepository.findById(45).get();
+    @Transactional
+    public void deleteTreeNode() {
+        TreeNode treeNode = treeNodeRepository.findById(5).get();
         TreeNode parent = treeNode.getParent();
         List<TreeNode> listChild = treeNode.getListChild();
         for (TreeNode child: listChild) {
             child.setParent(parent);
             treeNodeRepository.saveAndFlush(child);
         }
-        treeNodeRepository.deleteById(45);
+        treeNodeRepository.deleteByTreeId(treeNode.getId());
     }
 }

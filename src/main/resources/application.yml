@@ -23,9 +23,9 @@
 spring:
   datasource:
     username: root #  profiles: prod
-    password: 123
-    url: jdbc:mysql://localhost:3306/enda
-    driver-class-name: com.mysql.jdbc.Driver
+    password: 0420
+    url: jdbc:mysql://xiaom.xin:3306/enda
+    driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     filters: stat,wall
   jpa:
